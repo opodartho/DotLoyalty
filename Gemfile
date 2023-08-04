@@ -12,7 +12,6 @@ gem 'pg'
 gem 'puma'
 gem 'rails'
 gem 'redis'
-gem 'sassc-rails'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
@@ -20,6 +19,8 @@ gem 'turbo-rails'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do

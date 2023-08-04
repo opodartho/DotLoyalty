@@ -1,10 +1,13 @@
 require:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
 
 AllCops:
   NewCops: enable
   Exclude:
     - 'bin/**/*'
 Style/Documentation:
+  Enabled: false
+RSpec/MultipleExpectations:
   Enabled: false
