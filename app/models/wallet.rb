@@ -11,6 +11,7 @@ class Wallet < ApplicationRecord
   }.freeze
 
   belongs_to :store
+  has_many :transactions
 
   validates :name, :active, :singular, :plural, :expire_unit_method, presence: true
   validates :expire_unit_method, inclusion: { in: EXPIRE_METHODS.values }

@@ -102,6 +102,41 @@ ALTER SEQUENCE public.stores_id_seq OWNED BY public.stores.id;
 
 
 --
+-- Name: transactions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.transactions (
+    id bigint NOT NULL,
+    member_id bigint NOT NULL,
+    wallet_id bigint NOT NULL,
+    amount integer NOT NULL,
+    action integer NOT NULL,
+    active boolean DEFAULT true NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.transactions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.transactions_id_seq OWNED BY public.transactions.id;
+
+
+--
 -- Name: wallets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -153,6 +188,13 @@ ALTER TABLE ONLY public.stores ALTER COLUMN id SET DEFAULT nextval('public.store
 
 
 --
+-- Name: transactions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions ALTER COLUMN id SET DEFAULT nextval('public.transactions_id_seq'::regclass);
+
+
+--
 -- Name: wallets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -192,6 +234,14 @@ ALTER TABLE ONLY public.stores
 
 
 --
+-- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: wallets wallets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -204,6 +254,20 @@ ALTER TABLE ONLY public.wallets
 --
 
 CREATE INDEX index_members_on_store_id ON public.members USING btree (store_id);
+
+
+--
+-- Name: index_transactions_on_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_member_id ON public.transactions USING btree (member_id);
+
+
+--
+-- Name: index_transactions_on_wallet_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_wallet_id ON public.transactions USING btree (wallet_id);
 
 
 --
@@ -222,11 +286,27 @@ ALTER TABLE ONLY public.members
 
 
 --
+-- Name: transactions fk_rails_819d2cd6db; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT fk_rails_819d2cd6db FOREIGN KEY (wallet_id) REFERENCES public.wallets(id);
+
+
+--
 -- Name: wallets fk_rails_92e0ba2b16; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.wallets
     ADD CONSTRAINT fk_rails_92e0ba2b16 FOREIGN KEY (store_id) REFERENCES public.stores(id);
+
+
+--
+-- Name: transactions fk_rails_c3291ff996; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT fk_rails_c3291ff996 FOREIGN KEY (member_id) REFERENCES public.members(id);
 
 
 --
@@ -238,6 +318,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230804174242'),
 ('20230804204522'),
-('20230805102811');
+('20230805102811'),
+('20230805125228');
 
 
