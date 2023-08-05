@@ -26,6 +26,45 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: campaigns; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.campaigns (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    description text,
+    campaign_type integer DEFAULT 0 NOT NULL,
+    trigger integer DEFAULT 0 NOT NULL,
+    active boolean DEFAULT true NOT NULL,
+    active_from timestamp(6) without time zone,
+    active_to timestamp(6) without time zone,
+    "order" integer NOT NULL,
+    store_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: campaigns_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.campaigns_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: campaigns_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.campaigns_id_seq OWNED BY public.campaigns.id;
+
+
+--
 -- Name: members; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -112,6 +151,7 @@ CREATE TABLE public.transactions (
     amount integer NOT NULL,
     action integer NOT NULL,
     active boolean DEFAULT true NOT NULL,
+    store_id bigint NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -174,6 +214,13 @@ ALTER SEQUENCE public.wallets_id_seq OWNED BY public.wallets.id;
 
 
 --
+-- Name: campaigns id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.campaigns ALTER COLUMN id SET DEFAULT nextval('public.campaigns_id_seq'::regclass);
+
+
+--
 -- Name: members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -207,6 +254,14 @@ ALTER TABLE ONLY public.wallets ALTER COLUMN id SET DEFAULT nextval('public.wall
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: campaigns campaigns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.campaigns
+    ADD CONSTRAINT campaigns_pkey PRIMARY KEY (id);
 
 
 --
@@ -250,6 +305,13 @@ ALTER TABLE ONLY public.wallets
 
 
 --
+-- Name: index_campaigns_on_store_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_campaigns_on_store_id ON public.campaigns USING btree (store_id);
+
+
+--
 -- Name: index_members_on_store_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -264,6 +326,13 @@ CREATE INDEX index_transactions_on_member_id ON public.transactions USING btree 
 
 
 --
+-- Name: index_transactions_on_store_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_store_id ON public.transactions USING btree (store_id);
+
+
+--
 -- Name: index_transactions_on_wallet_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -275,6 +344,14 @@ CREATE INDEX index_transactions_on_wallet_id ON public.transactions USING btree 
 --
 
 CREATE INDEX index_wallets_on_store_id ON public.wallets USING btree (store_id);
+
+
+--
+-- Name: campaigns fk_rails_03e3b650e1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.campaigns
+    ADD CONSTRAINT fk_rails_03e3b650e1 FOREIGN KEY (store_id) REFERENCES public.stores(id);
 
 
 --
@@ -302,6 +379,14 @@ ALTER TABLE ONLY public.wallets
 
 
 --
+-- Name: transactions fk_rails_b3fa4aa1d0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT fk_rails_b3fa4aa1d0 FOREIGN KEY (store_id) REFERENCES public.stores(id);
+
+
+--
 -- Name: transactions fk_rails_c3291ff996; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -319,6 +404,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230804174242'),
 ('20230804204522'),
 ('20230805102811'),
-('20230805125228');
+('20230805125228'),
+('20230805193347');
 
 

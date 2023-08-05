@@ -43,4 +43,8 @@ en:
       created: Member was successfully created.
       updated: Member was successfully updated.
       destroyed: Member was successfully destroyed.
+    campaign:
+      created: Campaign was successfully created.
+      updated: Campaign was successfully updated.
+      destroyed: Campaign was successfully destroyed.
 

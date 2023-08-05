@@ -9,11 +9,11 @@ module Units
     private
 
     def add(input)
-
       Transaction.create!(
         member: input[:member],
         wallet: input[:wallet],
         amount: input[:amount],
+        store: input[:store],
         action: 'debit'
       )
       Success(input)

@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :transaction do
+    store
     member
     wallet
     amount { 10 }

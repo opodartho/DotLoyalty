@@ -16,3 +16,6 @@ RSpec/ExampleLength:
 Metrics/BlockLength:
   Exclude:
     - 'config/initializers/simple_form.rb'
+Metrics/MethodLength:
+  Exclude:
+    - 'db/**/*'

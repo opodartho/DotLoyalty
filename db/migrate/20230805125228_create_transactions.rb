@@ -8,6 +8,7 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
       t.integer :amount, null: false
       t.integer :action, null: false
       t.boolean :active, null: false, default: true
+      t.belongs_to :store, null: false, foreign_key: true
 
       t.timestamps
     end

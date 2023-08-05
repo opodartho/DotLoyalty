@@ -2,5 +2,5 @@
 
 class Member < ApplicationRecord
   belongs_to :store
-  has_many :transactions
+  has_many :transactions, dependent: :destroy
 end
