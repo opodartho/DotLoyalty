@@ -36,8 +36,11 @@ en:
       updated: Store was successfully updated.
       destroyed: Store was successfully destroyed.
     wallet:
-      created: Store was successfully created.
-      updated: Store was successfully updated.
-      destroyed: Store was successfully destroyed.
-
+      created: Wallet was successfully created.
+      updated: Wallet was successfully updated.
+      destroyed: Wallet was successfully destroyed.
+    member:
+      created: Member was successfully created.
+      updated: Member was successfully updated.
+      destroyed: Member was successfully destroyed.
 

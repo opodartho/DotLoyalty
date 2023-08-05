@@ -26,6 +26,41 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.members (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    gender character varying NOT NULL,
+    phone bigint NOT NULL,
+    birth_date date,
+    store_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.members_id_seq OWNED BY public.members.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -104,6 +139,13 @@ ALTER SEQUENCE public.wallets_id_seq OWNED BY public.wallets.id;
 
 
 --
+-- Name: members id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.members ALTER COLUMN id SET DEFAULT nextval('public.members_id_seq'::regclass);
+
+
+--
 -- Name: stores id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -123,6 +165,14 @@ ALTER TABLE ONLY public.wallets ALTER COLUMN id SET DEFAULT nextval('public.wall
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT members_pkey PRIMARY KEY (id);
 
 
 --
@@ -150,10 +200,25 @@ ALTER TABLE ONLY public.wallets
 
 
 --
+-- Name: index_members_on_store_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_members_on_store_id ON public.members USING btree (store_id);
+
+
+--
 -- Name: index_wallets_on_store_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_wallets_on_store_id ON public.wallets USING btree (store_id);
+
+
+--
+-- Name: members fk_rails_46cec426d0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.members
+    ADD CONSTRAINT fk_rails_46cec426d0 FOREIGN KEY (store_id) REFERENCES public.stores(id);
 
 
 --
@@ -172,6 +237,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20230804174242'),
-('20230804204522');
+('20230804204522'),
+('20230805102811');
 
 
