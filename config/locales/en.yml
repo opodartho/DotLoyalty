@@ -35,5 +35,9 @@ en:
       created: Store was successfully created.
       updated: Store was successfully updated.
       destroyed: Store was successfully destroyed.
+    wallet:
+      created: Store was successfully created.
+      updated: Store was successfully updated.
+      destroyed: Store was successfully destroyed.
 
 

@@ -67,10 +67,54 @@ ALTER SEQUENCE public.stores_id_seq OWNED BY public.stores.id;
 
 
 --
+-- Name: wallets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.wallets (
+    id bigint NOT NULL,
+    store_id bigint NOT NULL,
+    name character varying NOT NULL,
+    description text,
+    active boolean DEFAULT true NOT NULL,
+    singular character varying NOT NULL,
+    plural character varying NOT NULL,
+    expire_unit_method character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: wallets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.wallets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: wallets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.wallets_id_seq OWNED BY public.wallets.id;
+
+
+--
 -- Name: stores id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.stores ALTER COLUMN id SET DEFAULT nextval('public.stores_id_seq'::regclass);
+
+
+--
+-- Name: wallets id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.wallets ALTER COLUMN id SET DEFAULT nextval('public.wallets_id_seq'::regclass);
 
 
 --
@@ -98,12 +142,36 @@ ALTER TABLE ONLY public.stores
 
 
 --
+-- Name: wallets wallets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.wallets
+    ADD CONSTRAINT wallets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_wallets_on_store_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_wallets_on_store_id ON public.wallets USING btree (store_id);
+
+
+--
+-- Name: wallets fk_rails_92e0ba2b16; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.wallets
+    ADD CONSTRAINT fk_rails_92e0ba2b16 FOREIGN KEY (store_id) REFERENCES public.stores(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230804174242');
+('20230804174242'),
+('20230804204522');
 
 
