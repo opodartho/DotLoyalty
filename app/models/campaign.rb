@@ -2,4 +2,5 @@
 
 class Campaign < ApplicationRecord
   belongs_to :store
+  has_many :rules
 end

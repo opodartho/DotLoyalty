@@ -65,6 +65,41 @@ ALTER SEQUENCE public.campaigns_id_seq OWNED BY public.campaigns.id;
 
 
 --
+-- Name: conditions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.conditions (
+    id bigint NOT NULL,
+    condition_type integer DEFAULT 0 NOT NULL,
+    condition_cmp integer DEFAULT 0 NOT NULL,
+    value character varying NOT NULL,
+    rule_id bigint NOT NULL,
+    store_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: conditions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.conditions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: conditions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.conditions_id_seq OWNED BY public.conditions.id;
+
+
+--
 -- Name: members; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -97,6 +132,39 @@ CREATE SEQUENCE public.members_id_seq
 --
 
 ALTER SEQUENCE public.members_id_seq OWNED BY public.members.id;
+
+
+--
+-- Name: rules; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.rules (
+    id bigint NOT NULL,
+    "order" integer NOT NULL,
+    store_id bigint NOT NULL,
+    campaign_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: rules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.rules_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.rules_id_seq OWNED BY public.rules.id;
 
 
 --
@@ -221,10 +289,24 @@ ALTER TABLE ONLY public.campaigns ALTER COLUMN id SET DEFAULT nextval('public.ca
 
 
 --
+-- Name: conditions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conditions ALTER COLUMN id SET DEFAULT nextval('public.conditions_id_seq'::regclass);
+
+
+--
 -- Name: members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.members ALTER COLUMN id SET DEFAULT nextval('public.members_id_seq'::regclass);
+
+
+--
+-- Name: rules id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.rules ALTER COLUMN id SET DEFAULT nextval('public.rules_id_seq'::regclass);
 
 
 --
@@ -265,11 +347,27 @@ ALTER TABLE ONLY public.campaigns
 
 
 --
+-- Name: conditions conditions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conditions
+    ADD CONSTRAINT conditions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.members
     ADD CONSTRAINT members_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rules rules_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.rules
+    ADD CONSTRAINT rules_pkey PRIMARY KEY (id);
 
 
 --
@@ -312,10 +410,38 @@ CREATE INDEX index_campaigns_on_store_id ON public.campaigns USING btree (store_
 
 
 --
+-- Name: index_conditions_on_rule_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_conditions_on_rule_id ON public.conditions USING btree (rule_id);
+
+
+--
+-- Name: index_conditions_on_store_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_conditions_on_store_id ON public.conditions USING btree (store_id);
+
+
+--
 -- Name: index_members_on_store_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_members_on_store_id ON public.members USING btree (store_id);
+
+
+--
+-- Name: index_rules_on_campaign_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_rules_on_campaign_id ON public.rules USING btree (campaign_id);
+
+
+--
+-- Name: index_rules_on_store_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_rules_on_store_id ON public.rules USING btree (store_id);
 
 
 --
@@ -379,6 +505,14 @@ ALTER TABLE ONLY public.wallets
 
 
 --
+-- Name: conditions fk_rails_96128c24b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conditions
+    ADD CONSTRAINT fk_rails_96128c24b1 FOREIGN KEY (rule_id) REFERENCES public.rules(id);
+
+
+--
 -- Name: transactions fk_rails_b3fa4aa1d0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -395,6 +529,30 @@ ALTER TABLE ONLY public.transactions
 
 
 --
+-- Name: rules fk_rails_d1156c0df4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.rules
+    ADD CONSTRAINT fk_rails_d1156c0df4 FOREIGN KEY (campaign_id) REFERENCES public.campaigns(id);
+
+
+--
+-- Name: rules fk_rails_d5cb28146b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.rules
+    ADD CONSTRAINT fk_rails_d5cb28146b FOREIGN KEY (store_id) REFERENCES public.stores(id);
+
+
+--
+-- Name: conditions fk_rails_e682adb5ff; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.conditions
+    ADD CONSTRAINT fk_rails_e682adb5ff FOREIGN KEY (store_id) REFERENCES public.stores(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -405,6 +563,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230804204522'),
 ('20230805102811'),
 ('20230805125228'),
-('20230805193347');
+('20230805193347'),
+('20230805213907'),
+('20230805214627');
 
 

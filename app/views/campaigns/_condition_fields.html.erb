@@ -1,0 +1,6 @@
+<fieldset>
+  <%= f.input :condition_type %>
+  <%= f.input :condition_cmp %>
+  <%= f.input :value %>
+  <%= link_to 'remove condition', 'javascript:void(0);', data: { action: 'campaigns#removeFields' } %>
+</fieldset>

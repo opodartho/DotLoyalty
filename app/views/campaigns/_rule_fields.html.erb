@@ -1,0 +1,10 @@
+<fieldset>
+<%= f.input :order %>
+<%= f.hidden_field :_destroy %>
+<%= link_to 'remove rule', 'javascript:void(0);', data: { action: 'campaigns#removeFields' } %>
+<h4>Conditions</h4>
+<%= f.fields_for :conditions do |builder| %>
+  <%= render 'condition_fields', f: builder %>
+<% end %>
+<%= link_to_add_fields 'Add Condition', f, :conditions %>
+</fieldset>

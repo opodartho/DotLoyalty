@@ -1,62 +1,21 @@
-<%= form_with(model: campaign, class: "contents") do |form| %>
-  <% if campaign.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(campaign.errors.count, "error") %> prohibited this campaign from being saved:</h2>
-
-      <ul>
-        <% campaign.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= simple_form_for(@campaign) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :campaign_type %>
+  <%= f.input :trigger %>
+  <%= f.input :active %>
+  <%= f.input :active_from %>
+  <%= f.input :active_to %>
+  <%= f.input :order %>
+  <%= f.association :store %>
+  <h3>Rules</h3>
+  <%= link_to_add_fields 'Add Rule', f, :rules %>
+  <%= f.fields_for :rules do |builder| %>
+    <% if builder.object %>
+      <%= render 'rule_fields', f: builder %>
+    <% end %>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :campaign_type %>
-    <%= form.number_field :campaign_type, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :trigger %>
-    <%= form.number_field :trigger, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :active %>
-    <%= form.check_box :active, class: "block mt-2 h-5 w-5" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :active_from %>
-    <%= form.datetime_field :active_from, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :active_to %>
-    <%= form.datetime_field :active_to, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :order %>
-    <%= form.number_field :order, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :store_id %>
-    <%= form.text_field :store_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= f.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
