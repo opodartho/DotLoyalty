@@ -23,7 +23,7 @@ RSpec.describe 'campaigns/new' do
 
       assert_select 'input[name=?]', 'campaign[order]'
 
-      assert_select 'input[name=?]', 'campaign[store_id]'
+      assert_select 'select[name=?]', 'campaign[store_id]'
     end
   end
 end

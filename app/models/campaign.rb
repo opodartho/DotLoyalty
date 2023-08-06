@@ -2,5 +2,5 @@
 
 class Campaign < ApplicationRecord
   belongs_to :store
-  has_many :rules
+  has_many :rules, dependent: :destroy
 end

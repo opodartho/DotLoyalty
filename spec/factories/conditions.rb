@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :condition do
     condition_type { 1 }
     condition_cmp { 1 }
-    value { "MyString" }
+    value { 'MyString' }
     rule { nil }
     store { nil }
   end

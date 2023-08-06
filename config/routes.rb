@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :members
   resources :wallets
   resources :stores
-  root "campaigns#index"
+  root 'campaigns#index'
 end

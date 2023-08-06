@@ -12,7 +12,7 @@ export default class extends Controller {
   removeFields(event) {
     let _element = event.target;
     _element.previousElementSibling.value = true;
-    _element.parentElement.style.display = 'none';
+    _element.closest('div.rule').style.display = 'none';
     event.preventDefault();
   }
 

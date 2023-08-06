@@ -9,12 +9,14 @@
   <%= f.input :order %>
   <%= f.association :store %>
   <h3>Rules</h3>
+  <div class="p-5 bg-slate-100">
   <%= link_to_add_fields 'Add Rule', f, :rules %>
   <%= f.fields_for :rules do |builder| %>
     <% if builder.object %>
       <%= render 'rule_fields', f: builder %>
     <% end %>
   <% end %>
+  </div>
   <div class="inline">
     <%= f.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>

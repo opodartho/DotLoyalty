@@ -150,6 +150,19 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end
 
+  config.wrappers :datetime_picker, tag: 'div', class: 'my-5' do |b|
+    b.use :label, error_class: 'text-red-500'
+    b.use(
+      :input,
+      class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full',
+      data: { controller: 'datepicker' },
+      error_class: 'border-red-500',
+      valid_class: 'border-green-400'
+    )
+    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-500 text-xs italic' }
+    b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
+  end
+
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :vertical_form
 
@@ -158,11 +171,14 @@ SimpleForm.setup do |config|
   config.wrapper_mappings = {
     boolean: :vertical_boolean,
     check_boxes: :vertical_collection,
-    date: :vertical_multi_select,
-    datetime: :vertical_multi_select,
+    date: :datetime_picker,
+    datetime: :datetime_picker,
     file: :vertical_file,
     radio_buttons: :vertical_collection,
     range: :vertical_range,
     time: :vertical_multi_select
   }
 end
+
+SimpleForm::FormBuilder.map_type :date, :time, :datetime, to: SimpleForm::Inputs::StringInput
+SimpleForm::FormBuilder.map_type :integer, :decimal, :float, to: SimpleForm::Inputs::StringInput
