@@ -70,9 +70,10 @@ ALTER SEQUENCE public.campaigns_id_seq OWNED BY public.campaigns.id;
 
 CREATE TABLE public.conditions (
     id bigint NOT NULL,
-    condition_type integer DEFAULT 0 NOT NULL,
-    condition_cmp integer DEFAULT 0 NOT NULL,
-    value character varying NOT NULL,
+    feature character varying NOT NULL,
+    operators character varying NOT NULL,
+    "values" character varying NOT NULL,
+    "order" integer DEFAULT 0 NOT NULL,
     rule_id bigint NOT NULL,
     store_id bigint NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,

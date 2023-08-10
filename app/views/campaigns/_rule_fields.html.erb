@@ -1,9 +1,9 @@
 <div class="p-2 border rounded bg-white rule">
-  <div class="block">
-    <h4 class="float-left">Rule</h4>
-    <div class="float-right">
+  <div class="flex">
+    <h4 class="text-xl">Rule</h4>
+    <div class="flex flex-1 justify-end">
       <%= f.hidden_field :_destroy %>
-      <%= link_to 'remove rule', 'javascript:void(0);', data: { action: 'campaigns#removeFields' } %>
+      <%= link_to 'remove', 'javascript:void(0);', data: { action: 'campaigns#removeFields' } %>
     </div>
   </div>
 <h4>Conditions</h4>

@@ -66,7 +66,26 @@ class CampaignsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def campaign_params
-    params.require(:campaign).permit(:name, :description, :campaign_type, :trigger, :active, :active_from,
-                                     :active_to, :order, :store_id)
+    params.
+      require(:campaign).
+      permit(
+        :name,
+        :description,
+        :campaign_type,
+        :trigger,
+        :active,
+        :active_from,
+        :active_to,
+        :order,
+        :store_id,
+        rules_attributes: [
+          :_destroy,
+          conditions_attributes: [
+            :feature,
+            :operators,
+            :values
+          ]
+        ]
+      )
   end
 end

@@ -1,12 +1,14 @@
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-4 gap-4 items-center">
   <div>
-  <%= f.input :condition_type %>
+  <%= f.input :feature %>
   </div>
   <div>
-  <%= f.input :condition_cmp %>
+  <%= f.input :operators %>
   </div>
   <div>
-  <%= f.input :value %>
+  <%= f.input :values %>
   </div>
-  <%= link_to 'remove condition', 'javascript:void(0);', data: { action: 'campaigns#removeFields' } %>
+  <div>
+  <%= link_to 'remove', 'javascript:void(0);', data: { action: 'campaigns#removeFields' } %>
+  </div>
 </fieldset>

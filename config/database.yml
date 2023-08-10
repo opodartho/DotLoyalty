@@ -1,17 +1,17 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: red_loyalty
+  username: dot_loyalty
   password: secret
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 development:
   <<: *default
-  database: red_loyalty_development
+  database: dot_loyalty_development
 
 test:
   <<: *default
-  database: red_loyalty_test
+  database: dot_loyalty_test
 
 production:
   <<: *default
-  database: red_loyalty_production
+  database: dot_loyalty_production

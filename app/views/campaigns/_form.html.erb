@@ -1,8 +1,8 @@
 <%= simple_form_for(@campaign) do |f| %>
   <%= f.input :name %>
   <%= f.input :description %>
-  <%= f.input :campaign_type %>
-  <%= f.input :trigger %>
+  <%= f.input :campaign_type, as: :select, collection: Campaign.campaign_types.keys %>
+  <%= f.input :trigger, as: :select, collection: Campaign.triggers.keys %>
   <%= f.input :active %>
   <%= f.input :active_from %>
   <%= f.input :active_to %>
@@ -10,14 +10,16 @@
   <%= f.association :store %>
   <h3>Rules</h3>
   <div class="p-5 bg-slate-100">
-  <%= link_to_add_fields 'Add Rule', f, :rules %>
   <%= f.fields_for :rules do |builder| %>
     <% if builder.object %>
       <%= render 'rule_fields', f: builder %>
     <% end %>
   <% end %>
   </div>
-  <div class="inline">
+
+  <%= link_to_add_fields 'Add Rule', f, :rules %>
+
+  <div class="block mt-12">
     <%= f.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>

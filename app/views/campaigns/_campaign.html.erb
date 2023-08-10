@@ -1,52 +1,12 @@
-<div id="<%= dom_id campaign %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= campaign.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= campaign.description %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Campaign type:</strong>
-    <%= campaign.campaign_type %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Trigger:</strong>
-    <%= campaign.trigger %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Active:</strong>
-    <%= campaign.active %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Active from:</strong>
-    <%= campaign.active_from %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Active to:</strong>
-    <%= campaign.active_to %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Order:</strong>
-    <%= campaign.order %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Store:</strong>
-    <%= campaign.store_id %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this campaign", campaign, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this campaign', edit_campaign_path(campaign), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+<tr id="<%= dom_id campaign %>">
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.order %></td>
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.name %></td>
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.campaign_type %></td>
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.active %></td>
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.active_from %></td>
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.active_to %></td>
+  <td class="border border-slate-300 py-3 px-7"><%= campaign.created_at %></td>
+  <td class="border border-slate-300 py-3 px-7">
+    <%= link_to 'edit', edit_campaign_path(campaign) %>
+  </td>
+</tr>
