@@ -27,6 +27,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'rack-mini-profiler'
   gem 'rspec-rails'
   gem 'rubocop', require: false
@@ -34,3 +35,5 @@ group :development do
   gem 'rubocop-rspec', require: false
   gem 'web-console'
 end
+
+gem "devise", "~> 4.9"

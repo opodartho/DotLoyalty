@@ -6,4 +6,8 @@ class Rule < ApplicationRecord
   has_many :conditions, dependent: :destroy
 
   accepts_nested_attributes_for :conditions, allow_destroy: true
+
+  def store_id
+    1
+  end
 end

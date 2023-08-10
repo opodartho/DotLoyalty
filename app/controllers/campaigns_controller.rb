@@ -79,8 +79,12 @@ class CampaignsController < ApplicationController
         :order,
         :store_id,
         rules_attributes: [
+          :store_id,
+          :order,
           :_destroy,
           conditions_attributes: [
+            :store_id,
+            :order,
             :feature,
             :operators,
             :values
