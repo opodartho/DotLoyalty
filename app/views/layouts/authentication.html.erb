@@ -5,14 +5,86 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "vendor", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex" data-controller="<%= controller_name %>">
-      <%= yield %>
+  <body class="font-Nunito text-base font-normal text-gray-600">
+    <header class="border-b border-gray-200 bg-white">
+      <div class="container mx-auto xl:max-w-6xl">
+        <nav class="flex flex-row flex-nowrap items-center justify-between mt-0 py-4 px-6">
+          <a class="flex item-center py-2 text-xl" href="/">
+            <h2 class="text-2xl font-bold text-gray-200 px-4 max-h-9 overflow-hidden">
+              <%= inline_svg_tag 'logo' %>
+              <span class="text-indigo-900 uppercase">Dot Loyalty</sapn>
+            </h2>
+          </a>
+
+          <ul class="flex">
+            <li class="relative">
+              <a href="<%= new_session_path(resource_name) %>" class="py-3 px-4 flex hover:text-indigo-500 focus:outline-none">
+                <div class="relative inline-block">Login</div>
+              </a>
+            </li>
+            <li class="relative">
+              <a href="<%= new_registration_path(resource_name) %>" class="py-3 px-4 flex hover:text-indigo-500 focus:outline-none">
+                <div class="relative inline-block">Register</div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="py-8 md:py-12 bg-gray-100">
+        <div class="container mx-auto px-4 xl:max-w-6xl">
+          <div class="flex flex-wrap -mx-4 flex-row">
+            <div class="flex-shirnk max-w-full px-4 w-full lg:w-1/2">
+              <%= yield %>
+            </div>
+            <div class="flex-shirnk max-w-full px-4 w-full lg:w-1/2">
+              <div class="text-center mt-6 lg:mt-0">
+                <%= inline_svg_tag 'meeting.svg', class: 'max-w-full h-auto mx-auto' %>
+                <div class="px-4 mt-12">
+                  <h1 class="text-bold text-4xl mb-2">
+                    Engage your customers easily and rapidly
+                  </h1>
+                  <p class="text-lg mb-4 text-gray-500">
+                    Managing customer engagement is not as easy as it is today. You can view and manage all reports in a simple and practical way.                    
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
+    <footer class="bg-white py-6 border-t border-gray-200 dark:bg-gray-800 dark:border-gray-800">
+      <div class="container mx-auto px-4 xl:max-w-6xl ">
+        <div class="mx-auto px-4">
+          <div class="flex flex-wrap flex-row -mx-4">
+            <div class="flex-shrink max-w-full px-4 w-full md:w-1/2 text-center md:text-left">
+              <ul class="pl-0">
+                <li class="inline-block mr-3">
+                  <a class="hover:text-indigo-500" href="javascript:void(0)">Privacy</a>
+                </li>
+                <li class="inline-block mr-3">
+                  <a class="hover:text-indigo-500" href="javascript:void(0)">Terms of Service</a>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-shrink max-w-full px-4 w-full md:w-1/2 text-center md:text-right">
+              <p class="mb-0 mt-3 md:mt-0">
+                <a href="https://www.reddotdigitalit.com/" target="_blank" class="hover:text-red-500">Red&#x2022;Digital</a> | All right reserved
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

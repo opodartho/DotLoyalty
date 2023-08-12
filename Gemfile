@@ -6,8 +6,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.1'
 
 gem 'bootsnap', require: false
+gem 'devise'
+gem 'devise_invitable'
 gem 'dry-rails'
 gem 'dry-transaction'
+gem 'inline_svg'
 gem 'importmap-rails'
 gem 'jbuilder'
 gem 'pg'
@@ -35,5 +38,3 @@ group :development do
   gem 'rubocop-rspec', require: false
   gem 'web-console'
 end
-
-gem "devise", "~> 4.9"

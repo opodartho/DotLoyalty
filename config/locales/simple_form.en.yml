@@ -9,9 +9,10 @@ en:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "Please review the problems below:"
-    # Examples
-    # labels:
+      default_message: "Please review the problems below"
+    labels:
+      user:
+        agreement: I agree to the <a href="#" class="hover:text-indigo-500">Terms and Conditions</a>
     #   defaults:
     #     password: 'Password'
     #   user:

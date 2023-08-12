@@ -40,18 +40,17 @@ SimpleForm.setup do |config|
   # vertical forms
   #
   # vertical default_wrapper
-  config.wrappers :vertical_form, tag: 'div', class: 'my-5' do |b|
-    b.use :html5
+  config.wrappers :vertical_form, tag: 'div', class: 'mb-5' do |b|
     b.use :placeholder
     b.optional :maxlength
     b.optional :minlength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, error_class: 'text-red-500'
+    b.use :label, class:'inline-block mb-2', error_class: 'text-red-500'
     b.use(
       :input,
-      class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full',
+      class: '',
       error_class: 'border-red-500',
       valid_class: 'border-green-400'
     )
@@ -60,20 +59,13 @@ SimpleForm.setup do |config|
   end
 
   # vertical input for boolean (aka checkboxes)
-  config.wrappers :vertical_boolean, tag: 'div', class: 'mb-4 flex items-start', error_class: '' do |b|
-    b.use :html5
+  config.wrappers :vertical_boolean, tag: 'div', class: 'mb-6', error_class: '' do |b|
     b.optional :readonly
-    b.wrapper tag: 'div', class: 'flex items-center h-5' do |ba|
-      ba.use(
-        :input,
-        class: 'focus:ring-2 focus:ring-indigo-500 ring-offset-2 h-4 w-4 text-indigo-600 border-gray-300 rounded'
-      )
-    end
-    b.wrapper tag: 'div', class: 'ml-3 text-sm' do |bb|
-      bb.use :label, error_class: 'text-red-500'
-      bb.use :hint, wrap_with: { tag: 'p', class: 'block text-grey-700 text-xs italic' }
-      bb.use :full_error, wrap_with: { tag: 'p', class: 'block text-red-500 text-xs italic' }
-    end
+    b.use(
+      :input,
+      class: 'form-checkbox cursor-pointer h-5 w-5 text-indigo-500 dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded focus:outline-none'
+    )
+    b.use :label, class: 'cursor-pointer ml-2', error_class: 'text-red-500'
   end
 
   # vertical input for radio buttons and check boxes
@@ -84,7 +76,6 @@ SimpleForm.setup do |config|
     tag: 'div',
     class: 'my-4'
   ) do |b|
-    b.use :html5
     b.optional :readonly
     b.wrapper :legend_tag, tag: 'legend', class: 'text-sm font-medium text-gray-600',
                            error_class: 'text-red-500' do |ba|
@@ -102,7 +93,6 @@ SimpleForm.setup do |config|
 
   # vertical file input
   config.wrappers :vertical_file, tag: 'div', class: '' do |b|
-    b.use :html5
     b.use :placeholder
     b.optional :maxlength
     b.optional :minlength
@@ -116,7 +106,6 @@ SimpleForm.setup do |config|
 
   # vertical multi select
   config.wrappers :vertical_multi_select, tag: 'div', class: 'my-4', error_class: 'f', valid_class: '' do |b|
-    b.use :html5
     b.optional :readonly
     b.wrapper :legend_tag, tag: 'legend', class: 'text-sm font-medium text-gray-600',
                            error_class: 'text-red-500' do |ba|
@@ -137,7 +126,6 @@ SimpleForm.setup do |config|
   # vertical range input
   config.wrappers :vertical_range, tag: 'div', class: 'my-4', error_class: 'text-red-500',
                                    valid_class: 'text-green-400' do |b|
-    b.use :html5
     b.use :placeholder
     b.optional :readonly
     b.optional :step

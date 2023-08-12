@@ -66,9 +66,9 @@ class CampaignsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def campaign_params
-    params.
-      require(:campaign).
-      permit(
+    params
+      .require(:campaign)
+      .permit(
         :name,
         :description,
         :campaign_type,
@@ -82,13 +82,13 @@ class CampaignsController < ApplicationController
           :store_id,
           :order,
           :_destroy,
-          conditions_attributes: [
-            :store_id,
-            :order,
-            :feature,
-            :operators,
-            :values
-          ]
+          { conditions_attributes: %i[
+            store_id
+            order
+            feature
+            operators
+            values
+          ] }
         ]
       )
   end

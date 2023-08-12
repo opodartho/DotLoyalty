@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -27,11 +28,13 @@ RSpec.describe ConditionBuilder do
 
     it 'return executable statement for array' do
       expect(cb.parse(['abc', '.', 'def', '[', 'ghi', ']'], [10], ['>='])).to eq('abc.def.select { |a3| a3.ghi >= 10 }')
-      expect(cb.parse(['abc', '.', 'def', '[', 'ghi', ']'], ['jk'], ['>='])).to eq("abc.def.select { |a3| a3.ghi >= 'jk' }")
+      expect(cb.parse(['abc', '.', 'def', '[', 'ghi', ']'], ['jk'],
+                      ['>='])).to eq("abc.def.select { |a3| a3.ghi >= 'jk' }")
     end
 
     it 'return executable statement for nested array' do
-      expect(cb.parse(['abc', '.', 'def', '[', 'ghi', '[', 'jkl', ':', 'mnp', ']', ']'], ['qr', 20], ['=', '>='])).to eq("abc.def.select { |a3| a3.ghi.select { |a5| a5.jkl = 'qr' && mnp >= 20 } }")
+      expect(cb.parse(['abc', '.', 'def', '[', 'ghi', '[', 'jkl', ':', 'mnp', ']', ']'], ['qr', 20],
+                      ['=', '>='])).to eq("abc.def.select { |a3| a3.ghi.select { |a5| a5.jkl = 'qr' && mnp >= 20 } }")
     end
   end
 end

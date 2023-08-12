@@ -18,9 +18,9 @@
           <a
             class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
             aria-current="page"
-            href="/stores"
+            href="/users"
             data-te-nav-link-ref
-            >Stores</a
+            >Users</a
           >
         </li>
         <li
@@ -56,14 +56,14 @@
             >Campaigns</a
           >
         </li>
-        <% if admin_user_signed_in? %>
+        <% if user_signed_in? %>
           <li
             class="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1"
             data-te-nav-item-ref>
             <%= 
               link_to(
                 'Log out',
-                destroy_admin_user_session_path,
+                destroy_user_session_path,
                 data: { 'turbo-method': :delete },
                 class: 'active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400'
               )

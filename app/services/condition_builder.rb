@@ -1,18 +1,21 @@
+# frozen_string_literal: true
+
 class ConditionBuilder
-  OPERATORS = ['.', '[', ']', ':']
+  OPERATORS = ['.', '[', ']', ':'].freeze
 
   def parse(tokens, data, operators)
     statement = ''
 
     tokens.each_with_index do |token, index|
-      if token.eql?('[')
+      case token
+      when '['
         statement += ".select { |a#{index}| a#{index}."
-      elsif token.eql?(':')
+      when ':'
         statement += " #{operators.shift}"
         value = data.shift
         statement += value.is_a?(String) ? " '#{value}'" : " #{value}"
         statement += ' && '
-      elsif token.eql?(']')
+      when ']'
         operator = operators.shift
         statement += " #{operator}" if operator.present?
         value = data.shift
@@ -35,7 +38,7 @@ class ConditionBuilder
   def lex(str)
     tokens = []
 
-    while str.length > 0 do
+    while str.length.positive?
       token, str = lex_field(str)
 
       if token.present?
@@ -63,22 +66,18 @@ class ConditionBuilder
     field = ''
 
     str.each_char.with_index do |c, i|
-      if alphanumeric?(c)
-        field += c
-      else
-        return field.present? ? field : nil, str[i..]
-      end
+      return field.presence, str[i..] unless alphanumeric?(c)
+
+      field += c
     end
 
-    return field, ''
+    [field, '']
   end
 
   def lex_operator(str)
-    if OPERATORS.include?(str[0])
-      return str[0], str[1..]
-    else
-      return nil, str
-    end
+    return str[0], str[1..] if OPERATORS.include?(str[0])
+
+    [nil, str]
   end
 
   def alphanumeric?(char)
