@@ -1,32 +1,10 @@
-<div id="<%= dom_id member %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= member.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Gender:</strong>
-    <%= member.gender %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Phone:</strong>
-    <%= member.phone %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Birth date:</strong>
-    <%= member.birth_date %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Store:</strong>
-    <%= member.store_id %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this member", member, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this member', edit_member_path(member), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+<tr id="<%= dom_id member %>" class="bg-white">
+  <td class="border border-slate-300 py-1 px-1"><%= member.name %></td>
+  <td class="border border-slate-300 py-1 px-1"><%= member.phone %></td>
+  <td class="border border-slate-300 py-1 px-1"><%= member.created_at %></td>
+  <td class="border border-slate-300 py-1 px-1">-</td>
+  <td class="border border-slate-300 py-1 px-1">-</td>
+  <td class="border border-slate-300 py-1 px-1">-</td>
+  <td class="border border-slate-300 py-1 px-1">-</td>
+  <td class="border border-slate-300 py-1 px-2"></td>
+</tr>

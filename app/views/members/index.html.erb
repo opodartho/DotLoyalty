@@ -4,11 +4,25 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Members</h1>
-    <%= link_to 'New member', new_member_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="font-bold text-2xl">Members</h1>
+    <%= link_to 'Add member', new_member_path, class: "btn btn-primary" %>
   </div>
 
-  <div id="members" class="min-w-full">
-    <%= render @members %>
-  </div>
+  <table id="members" class="border-collapse border border-slate-400 min-w-full mt-8">
+    <thead>
+      <tr class="bg-white">
+        <th class="border border-slate-300 py-1 px-1">Full name</th>
+        <th class="border border-slate-300 py-1 px-1">Phone</th>
+        <th class="border border-slate-300 py-1 px-1">Registration date</th>
+        <th class="border border-slate-300 py-1 px-1">Transactions</th>
+        <th class="border border-slate-300 py-1 px-1">Total earned Points</th>
+        <th class="border border-slate-300 py-1 px-1">Active Points</th>
+        <th class="border border-slate-300 py-1 px-1">Total spending</th>
+        <th class="border border-slate-300 py-1 px-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @members %>
+    </tbody>
+  </table>
 </div>

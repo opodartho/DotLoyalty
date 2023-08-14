@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DotLoyalty</title>
+    <title>Dot Loyalty</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,10 +12,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render 'menu' %>
-    <main class="container mx-auto mt-28 px-5 flex" data-controller="<%= controller_name %>">
-      <%= yield %>
-    </main>
+  <body class="font-Nunito text-base font-normal text-gray-600">
+    <div class="wrapper overflow-x-hidden min-h-screen bg-gray-50">
+      <%= render 'menu' %>
+      <main class="container text-sm mx-auto mt-4 px-5 flex" data-controller="<%= controller_name %>">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>

@@ -1,76 +1,63 @@
 <!-- Main navigation container -->
-<nav
-  class="relative flex w-full flex-nowrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:flex-wrap lg:justify-start lg:py-4"
-  data-te-navbar-ref>
-  <div class="flex w-full flex-wrap items-center justify-between px-3">
-    <div
-      class="!visible mt-2 hidden flex-grow basis-[100%] items-center justify-center lg:mt-0 lg:!flex lg:basis-auto"
-      id="navbarSupportedContent8"
-      data-te-collapse-item>
-      <!-- Left links -->
-      <ul
-        class="list-style-none flex flex-col pl-0 lg:mt-1 lg:flex-row"
-        data-te-navbar-nav-ref>
-        <!-- Home link -->
-        <li
-          class="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1"
-          data-te-nav-item-ref>
-          <a
-            class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            aria-current="page"
-            href="/users"
-            data-te-nav-link-ref
-            >Users</a
-          >
-        </li>
-        <li
-          class="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1"
-          data-te-nav-item-ref>
-          <a
-            class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            aria-current="page"
-            href="/members"
-            data-te-nav-link-ref
-            >Members</a
-          >
-        </li>
-        <li
-          class="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1"
-          data-te-nav-item-ref>
-          <a
-            class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            aria-current="page"
-            href="/wallets"
-            data-te-nav-link-ref
-            >Wallets</a
-          >
-        </li>
-        <li
-          class="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1"
-          data-te-nav-item-ref>
-          <a
-            class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            aria-current="page"
-            href="/campaigns"
-            data-te-nav-link-ref
-            >Campaigns</a
-          >
-        </li>
-        <% if user_signed_in? %>
-          <li
-            class="my-4 pl-2 lg:my-0 lg:pl-2 lg:pr-1"
-            data-te-nav-item-ref>
-            <%= 
-              link_to(
-                'Log out',
-                destroy_user_session_path,
-                data: { 'turbo-method': :delete },
-                class: 'active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400'
-              )
-            %>
-          </li>
-        <% end %>
-      </ul>
+<nav id="sidebar-menu" class="fixed h-screen bg-white shadow-md w-0 md:w-20">
+  <div class="h-full flex flex-col overflow-y-auto scrollbars">
+    <!-- logo -->
+    <div class="mh-18 text-center py-5">
+      <a href="/" class="relative">
+        <h2 class="text-3xl font-semibold mx-auto logo-compact">
+          <%= inline_svg_tag 'logo' %>
+        </h2>
+      </a>
     </div>
+
+    <ul id="side-menu" class="w-full float-none flex flex-col font-semibold text-2xl pl-1.5">
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-home"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="<%= members_path %>" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-users"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="<%= campaigns_path %>" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-play-circle"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-trophy"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-wallet"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-certificate"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-gift"></i>
+        </a>
+      </li>
+    </ul>
+    <ul id="side-bottom-menu" class="w-full float-none flex flex-1 flex-col justify-end font-semibold text-2xl pl-1.5">
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-users-cog"></i>
+        </a>
+      </li>
+      <li class="relative">
+        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+          <i class="inline-block h-5 w-5 mr-2 las la-sign-in-alt"></i>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>
