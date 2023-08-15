@@ -1,31 +1,30 @@
 <div class="max-2-full w-full px-2 sm:px-12 lg:pr-20 mb-12 lg:mb-0">
   <div class="relative">
 
-    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= f.error_notification %>
+    <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.hidden_field :invitation_token %>
       <div class="p-6 sm:py-8 sm:px-12 rounded-lg bg-white shadow-xl">
         <div class="text-center">
           <h1 class="text-2xl leading-normal mb-3 font-bold text-grey-800 text-center">
-            Reset Password
+            <%= t "devise.invitations.edit.header" %>
           </h1>
         </div>
         <hr class="block w-12 h-0.5 mx-auto my-5 bg-gray-700 border-gray-700">
         <p class="text-gray-500 mb-6">
-          Enter your email address and we'll send you an email with instructions to reset your password.
+          Enter your new password and try login again
         </p>
-        <%= f.input :email,
-                    required: true,
-                    autofocus: true,
-                    input_html: { autocomplete: "email" } %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation, label: 'Repeat Password' %>
+
         <div class="text-center">
           <button type="submit" class="py-2 px-4 inline-block text-center mb-3 rounded leading-5 text-gray-100 bg-indigo-500 border border-indigo-500 hover:text-white hover:bg-indigo-600 hover:ring-0 hover:border-indigo-600 focus:bg-indigo-600 focus:border-indigo-600 focus:outline-none focus:ring-0">
             <i class="las la-key"></i>
-            Reset Password
+            <%= t("devise.invitations.edit.submit_button") %>
           </button>
         </div>
       </div>
-
-
     <% end %>
   </div>
 </div>

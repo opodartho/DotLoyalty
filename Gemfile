@@ -17,6 +17,8 @@ gem 'pg'
 gem 'puma'
 gem 'rails'
 gem 'redis'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'simple_form'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
@@ -27,12 +29,13 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rspec-rails'
+  gem 'rswag-specs'
 end
 
 group :development do
   gem 'letter_opener'
   gem 'rack-mini-profiler'
-  gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false

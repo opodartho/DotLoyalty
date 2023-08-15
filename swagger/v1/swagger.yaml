@@ -1,0 +1,86 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/{storeCode}/transactions":
+    post:
+      summary: This method allows creating a new Transaction.
+      tags:
+      - Transactions
+      parameters:
+      - name: storeCode
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: transaction created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                documentNumber:
+                  type: string
+                documentType:
+                  type: string
+                documentDate:
+                  type: string
+                  format: date-time
+                memberId:
+                  type: string
+                  format: uuid
+                grossValue:
+                  type: integer
+                labels:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/label"
+                items:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/item"
+                channelId:
+                  type: string
+                required:
+                - documentNumber
+                - documentType
+                - documentDate
+                - memberId
+                - grossValue
+                - channelId
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
+components:
+  schemas:
+    label:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    item:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        quantity:
+          type: integer
+        grossValue:
+          type: integer
+        category:
+          type: string
+        labels:
+          type: array
+          items:
+            "$ref": "#/components/schemas/label"

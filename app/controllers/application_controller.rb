@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :agreement, store_attributes: [:name]])
   end
 
-  def authenticate_user!
-    super
+  def authenticate_user!(options = {})
     Current.store = current_user&.store
+    super
   end
 
   def current_store

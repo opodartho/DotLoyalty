@@ -49,12 +49,12 @@
     </ul>
     <ul id="side-bottom-menu" class="w-full float-none flex flex-1 flex-col justify-end font-semibold text-2xl pl-1.5">
       <li class="relative">
-        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+        <a href="<%= users_path %>" class="block py-2.5 px-6 hover:text-indigo-500">
           <i class="inline-block h-5 w-5 mr-2 las la-users-cog"></i>
         </a>
       </li>
       <li class="relative">
-        <a href="javascript:void(0);" class="block py-2.5 px-6 hover:text-indigo-500">
+        <a href="<%= destroy_user_session_path %>" data-turbo-method="delete" class="block py-2.5 px-6 hover:text-indigo-500">
           <i class="inline-block h-5 w-5 mr-2 las la-sign-in-alt"></i>
         </a>
       </li>

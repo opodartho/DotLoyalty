@@ -367,4 +367,5 @@ Rails.application.config.to_prepare do
   Devise::ConfirmationsController.layout 'authentication'
   Devise::UnlocksController.layout 'authentication'
   Devise::PasswordsController.layout 'authentication'
+  Devise::InvitationsController.layout proc { |_controller| user_signed_in? ? 'application' : 'authentication' }
 end

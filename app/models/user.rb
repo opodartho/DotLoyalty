@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  attribute :agreement, :boolean
   devise(
     :confirmable,
     :database_authenticatable,

@@ -4,6 +4,7 @@ class Store < ApplicationRecord
   after_initialize :set_code
 
   has_many :campaigns, dependent: :destroy
+  has_many :users, dependent: :destroy
 
   validates :name, presence: true
   validates_uniqueness_of :code
