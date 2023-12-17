@@ -1,9 +1,17 @@
 require 'swagger_helper'
 
+
 describe 'Transactions' do
+  before(:example) {
+    application = FactoryBot.create(:application)
+    store = FactoryBot.create(:store)
+    @access_token = FactoryBot.create(:access_token, application: application, resource_owner_id: store.id)
+  }
+
   path '/api/v1/{storeCode}/transactions' do
     post 'This method allows creating a new Transaction.' do
       tags 'Transactions'
+      security [ bearer_auth: [] ]
       consumes 'application/json'
       parameter name: 'storeCode', in: :path, type: :string
       parameter name: :transaction, in: :body, schema: {
@@ -29,7 +37,9 @@ describe 'Transactions' do
       }
 
       response '201', 'transaction created' do
-        let(:storeCode) { create(:store).code }
+        let(:store) { create(:store) }
+        let(:storeCode) { store.code }
+        let(:Authorization) { "Bearer #{create(:access_token, resource_owner_id: store.id).plaintext_token}" }
         let(:transaction) {
           {
             documentNumber: '12345678',

@@ -92,6 +92,8 @@ GEM
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.5.0)
+    doorkeeper (5.6.6)
+      railties (>= 5)
     dry-auto_inject (1.0.1)
       dry-core (~> 1.0)
       zeitwerk (~> 2.6)
@@ -360,6 +362,7 @@ DEPENDENCIES
   debug
   devise
   devise_invitable
+  doorkeeper
   dry-rails
   dry-transaction
   factory_bot_rails

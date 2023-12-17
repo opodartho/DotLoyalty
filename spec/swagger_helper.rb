@@ -33,6 +33,14 @@ RSpec.configure do |config|
         }
       ],
       components: {
+        securitySchemes: {
+          bearer_auth: {
+            description: '...',
+            type: :apiKey,
+            name: 'Authorization',
+            in: :header
+          }
+        },
         schemas: {
           label: {
             type: :object,

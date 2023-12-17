@@ -5,6 +5,11 @@ class Store < ApplicationRecord
 
   has_many :campaigns, dependent: :destroy
   has_many :users, dependent: :destroy
+  has_many :access_tokens,
+           class_name: 'Doorkeeper::AccessToken',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all
+
 
   validates :name, presence: true
   validates_uniqueness_of :code

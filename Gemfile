@@ -8,6 +8,7 @@ ruby '3.1.1'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise_invitable'
+gem 'doorkeeper'
 gem 'dry-rails'
 gem 'dry-transaction'
 gem 'inline_svg'
